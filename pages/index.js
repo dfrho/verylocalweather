@@ -2,10 +2,11 @@ import Link from '@/components/Link'
 import { PageSEO } from '@/components/SEO'
 import siteMetadata from '@/data/siteMetadata'
 import formatDate from '@/lib/utils/formatDate'
-import { GraphQLClient, gql } from 'graphql-request'
+import { gql } from 'graphql-request'
 import styled from 'styled-components'
 import sortByDate from '../lib/sortByDate'
 import hygraph from '../hygraph'
+import Image from 'components/Image'
 
 const QUERY = gql`
   {
@@ -13,12 +14,6 @@ const QUERY = gql`
       slug
       tags
       title
-      content {
-        html
-        text
-        raw
-      }
-      nestedHtml
       youTubeUrl
       date
       excerpt
@@ -61,9 +56,18 @@ export default function Home({ posts }) {
       <PageSEO title={siteMetadata.title} description={siteMetadata.description} />
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="space-y-2 pt-6 pb-8 md:space-y-5">
-          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
-            NashMusic
-          </h1>
+          <div className="flex items-center">
+            <Image
+              src="/static/images/very-local-logo.webp"
+              alt="Very Local Weather"
+              width={434} // 50% of the original width (869 * 0.5)
+              height={84} // 50% of the original height (168 * 0.5)
+            />
+            <h1 className="ml-10 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
+              Nashville
+            </h1>
+          </div>
+
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
             {siteMetadata.description}
           </p>
@@ -71,7 +75,7 @@ export default function Home({ posts }) {
         <ul className="divide-y divide-gray-200 dark:divide-gray-700">
           {!posts.length && 'No posts found.'}
           {posts.slice(0, MAX_DISPLAY).map((frontMatter) => {
-            const { slug, date, title, summary, tags, excerpt, youTubeUrl } = frontMatter
+            const { slug, date, title, excerpt, youTubeUrl } = frontMatter
 
             return (
               <li key={slug} className="py-12">
