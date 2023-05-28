@@ -1,4 +1,5 @@
 import Link from '@/components/Link'
+import { useTheme } from 'next-themes'
 import { PageSEO } from '@/components/SEO'
 import siteMetadata from '@/data/siteMetadata'
 import formatDate from '@/lib/utils/formatDate'
@@ -51,6 +52,7 @@ export async function getStaticProps() {
 }
 
 export default function Home({ posts }) {
+  const { theme } = useTheme()
   return (
     <>
       <PageSEO title={siteMetadata.title} description={siteMetadata.description} />
@@ -58,10 +60,14 @@ export default function Home({ posts }) {
         <div className="space-y-2 pt-6 pb-8 md:space-y-5">
           <div className="flex items-center">
             <Image
-              src="/static/images/very-local-logo.webp"
+              src={
+                theme === 'dark'
+                  ? '/static/images/very-local-logo.webp'
+                  : '/static/images/very-local-logo-light.png'
+              }
               alt="Very Local Weather"
-              width={434} // 50% of the original width (869 * 0.5)
-              height={84} // 50% of the original height (168 * 0.5)
+              width={434}
+              height={84}
             />
             <h1 className="ml-10 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
               Nashville
