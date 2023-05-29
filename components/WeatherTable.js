@@ -75,10 +75,10 @@ const Weather = () => {
   return (
     <div className="container">
       {weatherData ? (
-        <div className={styles.main}>
-          <div className={styles.card}>
-            <div className={styles['weather-status']}>
-              <h3 className={styles.title}>
+        <div>
+          <div>
+            <div>
+              <h3>
                 {`Current Weather in ${weatherData.location.name} is
             ${capitalizeWords(weatherData.current.condition.text)}`}
               </h3>
@@ -89,10 +89,8 @@ const Weather = () => {
                     data-tooltip-id="my-tooltip"
                     data-tooltip-content="AI advice on what to pack"
                     onClick={() => setIsModalOpen(true)}
-                    className={`${styles['weather-button']} ${advice && 'advice-available'}`}
                   >
                     <img
-                      className={styles['weather-icon']}
                       src={`https:${weatherData.current.condition.icon}`}
                       alt={weatherData.current.condition.text}
                     />
@@ -100,14 +98,14 @@ const Weather = () => {
                 </>
               ) : (
                 <img
-                  className={styles['weather-icon']}
+                }
                   src={`https:${weatherData.current.condition.icon}`}
                   alt={weatherData.current.condition.text}
                 />
               )}
             </div>
 
-            <ul className={styles.description}>
+            <ul >
               <li>{`Cloud coverage is ${weatherData.current.cloud}%`}</li>
               <li>{`Temperature is ${weatherData.current.temp_f}F/${weatherData.current.temp_c}C`}</li>
               <li>{`It feels like ${weatherData.current.feelslike_f}F/${weatherData.current.feelslike_c}C`}</li>
@@ -122,9 +120,9 @@ const Weather = () => {
           </div>
 
           {isModalOpen && (
-            <div className={styles['modal-overlay']} onClick={closeModal}>
-              <div className={styles['modal-advice']}>
-                <button className={styles['close-button']} onClick={closeModal}>
+            <div  onClick={closeModal}>
+              <div >
+                <button  onClick={closeModal}>
                   X
                 </button>
                 <div>
