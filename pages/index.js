@@ -1,7 +1,6 @@
 import Link from '@/components/Link'
 import { useTheme } from 'next-themes'
 import { PageSEO } from '@/components/SEO'
-import siteMetadata from '@/data/siteMetadata'
 import formatDate from '@/lib/utils/formatDate'
 import { gql } from 'graphql-request'
 import styled from 'styled-components'
@@ -18,6 +17,9 @@ const QUERY = gql`
       youTubeUrl
       date
       excerpt
+    }
+    seos {
+      description
     }
   }
 `
@@ -46,16 +48,17 @@ export const YoutubeContainer = styled.div`
 const MAX_DISPLAY = 5
 
 export async function getStaticProps() {
-  const { posts } = await hygraph.request(QUERY)
+  const { posts, seos } = await hygraph.request(QUERY)
   const sortedPosts = sortByDate(posts)
-  return { props: { posts: sortedPosts } }
+  return { props: { seos, posts: sortedPosts } }
 }
 
-export default function Home({ posts }) {
+export default function Home({ posts, seos }) {
   const { theme } = useTheme()
+  const seoInfo = seos[0]
   return (
     <>
-      <PageSEO title={siteMetadata.title} description={siteMetadata.description} />
+      <PageSEO title={seoInfo.title} description={seoInfo.description} />
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="space-y-2 pt-6 pb-8 md:space-y-5">
           <div className="flex items-center">
@@ -69,13 +72,10 @@ export default function Home({ posts }) {
               width={434}
               height={84}
             />
-            <h1 className="ml-10 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
-              Nashville
-            </h1>
           </div>
 
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            {siteMetadata.description}
+            {seoInfo.description}
           </p>
         </div>
         <ul className="divide-y divide-gray-200 dark:divide-gray-700">

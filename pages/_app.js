@@ -23,7 +23,7 @@ export default function App({ Component, pageProps }) {
   // useEffect will run on the client-side only, and only on mount given no dependencies
   // so user is only prompted once
   useEffect(() => {
-    const cookie = getCookieValue('myAwesomeNashVegasCookie2')
+    const cookie = getCookieValue('veryLocalCookie')
     if (cookie === 'true' || cookie === 'false') {
       setCookieValue(cookie)
     }
@@ -63,14 +63,14 @@ export default function App({ Component, pageProps }) {
           location="bottom"
           declineButtonText="Nope"
           buttonText="OK Got It"
-          cookieName="myAwesomeNashVegasCookie2"
+          cookieName="VeryLocalCookie"
           style={{ background: '#3671B6', display: 'flex', alignItems: 'center' }}
           buttonStyle={{ color: '#fff', background: 'green', fontSize: '13px' }}
           expires={150}
         >
           This app uses cookies to enhance the user experience, as well as analytics that capture
           screen clicks, location, and mouse movements (PostHog.com). That is all we track. Enjoy
-          the music 🤠.
+          the weather 🤠.
         </CookieConsent>
       </LayoutWrapper>
     </ThemeProvider>
