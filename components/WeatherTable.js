@@ -98,14 +98,13 @@ const Weather = () => {
                 </>
               ) : (
                 <img
-                }
                   src={`https:${weatherData.current.condition.icon}`}
                   alt={weatherData.current.condition.text}
                 />
               )}
             </div>
 
-            <ul >
+            <ul>
               <li>{`Cloud coverage is ${weatherData.current.cloud}%`}</li>
               <li>{`Temperature is ${weatherData.current.temp_f}F/${weatherData.current.temp_c}C`}</li>
               <li>{`It feels like ${weatherData.current.feelslike_f}F/${weatherData.current.feelslike_c}C`}</li>
@@ -120,11 +119,9 @@ const Weather = () => {
           </div>
 
           {isModalOpen && (
-            <div  onClick={closeModal}>
-              <div >
-                <button  onClick={closeModal}>
-                  X
-                </button>
+            <div onClick={closeModal}>
+              <div>
+                <button onClick={closeModal}>X</button>
                 <div>
                   <h3>How to Pack</h3>
                   <p>{advice}</p>
