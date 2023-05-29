@@ -6,7 +6,6 @@ import { gql } from 'graphql-request'
 import styled from 'styled-components'
 import sortByDate from '../lib/sortByDate'
 import hygraph from '../hygraph'
-import Image from 'components/Image'
 
 const QUERY = gql`
   {
@@ -61,19 +60,6 @@ export default function Home({ posts, seos }) {
       <PageSEO title={seoInfo.title} description={seoInfo.description} />
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="space-y-2 pt-6 pb-8 md:space-y-5">
-          <div className="flex items-center">
-            <Image
-              src={
-                theme === 'dark'
-                  ? '/static/images/very-local-logo.webp'
-                  : '/static/images/very-local-logo-light.png'
-              }
-              alt="Very Local Weather"
-              width={434}
-              height={84}
-            />
-          </div>
-
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
             {seoInfo.description}
           </p>
