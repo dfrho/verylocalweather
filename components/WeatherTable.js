@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Tooltip } from 'react-tooltip'
-// import styles from './index.module.css'
 import 'react-tooltip/dist/react-tooltip.css'
 
 const Weather = () => {
