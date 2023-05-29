@@ -1,6 +1,6 @@
 import Link from '@/components/Link'
 import formatDate from '@/lib/utils/formatDate'
-import { GraphQLClient, gql } from 'graphql-request'
+import { gql } from 'graphql-request'
 import { YoutubeContainer } from '../index'
 import DOMPurify from 'isomorphic-dompurify'
 import { PageSEO } from '@/components/SEO'
@@ -43,9 +43,6 @@ const POSTQUERY = gql`
   }
 `
 export async function getStaticProps({ params }) {
-  const hygraph = new GraphQLClient(
-    'https://api-us-east-1-shared-usea1-02.hygraph.com/v2/clf8fl33302ow01umha9250xr/master'
-  )
   const { posts } = await hygraph.request(POSTQUERY, { slug: params.slug[0] })
 
   return { props: { post: posts[0] } }
