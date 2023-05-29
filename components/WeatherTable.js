@@ -3,7 +3,7 @@ import axios from 'axios'
 import { Tooltip } from 'react-tooltip'
 import 'react-tooltip/dist/react-tooltip.css'
 
-const Weather = () => {
+const WeatherTable = () => {
   const [weatherData, setWeatherData] = useState(null)
   const [advice, setAdvice] = useState('')
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -72,57 +72,78 @@ const Weather = () => {
   }
 
   return (
-    <div className="container">
+    <div className="weather-container">
       {weatherData ? (
-        <div>
-          <div>
-            <div>
-              <h3>
-                {`Current Weather in ${weatherData.location.name} is
+        <div className="weather-data">
+          <div className="weather-status">
+            <h3 className="weather-header">
+              {`Current Weather in ${weatherData.location.name} is
             ${capitalizeWords(weatherData.current.condition.text)}`}
-              </h3>
-              {advice ? (
-                <>
-                  {!isModalOpen && <Tooltip id="my-tooltip" place="top" effect="solid" />}
-                  <button
-                    data-tooltip-id="my-tooltip"
-                    data-tooltip-content="AI advice on what to pack"
-                    onClick={() => setIsModalOpen(true)}
-                  >
-                    <img
-                      src={`https:${weatherData.current.condition.icon}`}
-                      alt={weatherData.current.condition.text}
-                    />
-                  </button>
-                </>
-              ) : (
-                <img
-                  src={`https:${weatherData.current.condition.icon}`}
-                  alt={weatherData.current.condition.text}
-                />
-              )}
-            </div>
+            </h3>
 
-            <ul>
-              <li>{`Cloud coverage is ${weatherData.current.cloud}%`}</li>
-              <li>{`Temperature is ${weatherData.current.temp_f}F/${weatherData.current.temp_c}C`}</li>
-              <li>{`It feels like ${weatherData.current.feelslike_f}F/${weatherData.current.feelslike_c}C`}</li>
-              <li>{`Humidity is ${weatherData.current.humidity}%`}</li>
-              <li>{`Visibility is at ${weatherData.current.vis_miles} miles`}</li>
-              <li>{`Current wind speed is ${weatherData.current.wind_mph} mph`}</li>
-              {weatherData.current.gust_mph > 8 && (
-                <li>{`Winds are gusting at ${weatherData.current.gust_mph} mph`}</li>
-              )}
-              <li>{`Wind direction is ${weatherData.current.wind_dir}`}</li>
-            </ul>
+            {advice ? (
+              <div className="weather-condition">
+                <Tooltip id="my-tooltip" />
+                <button
+                  data-tooltip-id="my-tooltip"
+                  data-tooltip-content="What AI says to pack for the day"
+                  data-tooltip-place="top"
+                  onClick={() => setIsModalOpen(true)}
+                >
+                  <img
+                    className="weather-icon"
+                    src={`https:${weatherData.current.condition.icon}`}
+                    alt={weatherData.current.condition.text}
+                  />
+                </button>
+              </div>
+            ) : (
+              <img
+                className="weather-icon"
+                src={`https:${weatherData.current.condition.icon}`}
+                alt={weatherData.current.condition.text}
+              />
+            )}
           </div>
-
+          <table>
+            <tbody>
+              <tr>
+                <td>{`Cloud coverage is ${weatherData.current.cloud}%`}</td>
+              </tr>
+              <tr>
+                <td>{`Temperature is ${weatherData.current.temp_f}F/${weatherData.current.temp_c}C`}</td>
+              </tr>
+              <tr>
+                <td>{`It feels like ${weatherData.current.feelslike_f}F/${weatherData.current.feelslike_c}C`}</td>
+              </tr>
+              <tr>
+                <td>{`Humidity is ${weatherData.current.humidity}%`}</td>
+              </tr>
+              <tr></tr>
+              <tr>
+                <td>{`Visibility is at ${weatherData.current.vis_miles} miles`}</td>
+              </tr>
+              <tr>
+                <td>{`Current wind speed is ${weatherData.current.wind_mph} mph`}</td>
+              </tr>
+              {weatherData.current.gust_mph > 8 && (
+                <tr>
+                  <td>{`Winds are gusting at ${weatherData.current.gust_mph} mph`}</td>
+                </tr>
+              )}
+              <tr>
+                <td>{`Wind direction is ${weatherData.current.wind_dir}`} </td>
+              </tr>
+            </tbody>
+          </table>
           {isModalOpen && (
-            <div onClick={closeModal}>
-              <div>
-                <button onClick={closeModal}>X</button>
+            <div className="modal-overlay" onClick={closeModal}>
+              <div className="modal-advice">
+                <button className="close-button" onClick={closeModal}>
+                  X
+                </button>
                 <div>
-                  <h3>How to Pack</h3>
+                  <h3>Advice on How to Pack Today</h3>
                   <p>{advice}</p>
                 </div>
               </div>
@@ -132,14 +153,6 @@ const Weather = () => {
       ) : (
         <p>Loading...</p>
       )}
-    </div>
-  )
-}
-
-function WeatherTable() {
-  return (
-    <div className="Home">
-      <Weather></Weather>
     </div>
   )
 }
