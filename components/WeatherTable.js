@@ -38,10 +38,20 @@ const Weather = () => {
         try {
           const response = await axios.post(
             'https://weather-packing-advice.vercel.app/api/getAdvice',
-            { weatherData },
+
             {
-              cancelToken: new axios.CancelToken((c) => (cancel = c)),
+              prompt: `In the voice of Willard Scott without saying so, and based on weather conditions summarized as ${weatherData.current.condition.text} consisting of Cloud Coverage is ${weatherData.current.cloud}% and Temperature is ${weatherData.current.temp_f}F and Humidity is ${weatherData.current.humidity}% and Precipitation today is ${weatherData.current.precip_in} inches and Current Wind Speed is ${weatherData.current.wind_mph} mph and Winds are Gusting at ${weatherData.current.gust_mph} mph, any advice on what a web user looking at your response in a pop up window, should pack for the day, as in outerwear, sunglasses, and/or an umbrella?`,
+              stop: ['\\n'],
+            },
+            {
+              headers: {
+                'Content-Type': 'application/json',
+              },
             }
+            // { weatherData },
+            // {
+            //   cancelToken: new axios.CancelToken((c) => (cancel = c)),
+            // }
           )
           const advice = response.data.advice
           setAdvice(advice)
