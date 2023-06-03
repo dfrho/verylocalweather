@@ -7,7 +7,6 @@ const siteMetadata = {
   theme: 'system', // system, dark or light
   siteUrl: 'https://verylocalweather.vercel.app/',
   siteRepo: 'https://github.com/dfrho/verylocalweather.git',
-  siteLogo: '/static/images/logo-one.png',
   image: '/static/images/avatar-one.png',
   socialBanner: '/static/images/twitter-card-two.png',
   email: 'david@espressocode.tech',
