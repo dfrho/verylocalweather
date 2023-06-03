@@ -5,7 +5,6 @@ occupation: Customer-Facing Engineer
 company: Free Agent Currently
 email: david@espressocode.tech
 linkedin: https://www.linkedin.com/in/rhodesdavid/
-github: https://github.com/dfrho/
 ---
 
 David Rhodes is a customer-facing engineer with backgrounds in SaaS sales and enterprise frontend engineering. Curious about new tech and eager to build anything in JavaScript. Also passionate about Nashville and its inspiring local music scene.

@@ -4,14 +4,32 @@ const configuration = new Configuration({
   apiKey: process.env.OPENAI_APIKEY,
 })
 const openai = new OpenAIApi(configuration)
-// only add a period if the last character is not punctuation
-function addPeriod(text) {
-  const punctuation = ['.', '!']
-  const lastCharacter = text[text.length - 1]
-  if (!punctuation.includes(lastCharacter)) {
-    return `${text}.`
+
+// Cache middleware
+const cache = new Map()
+const cacheMiddleware = (handler) => async (req, res) => {
+  const { weatherData: cacheData } = req.body
+  const cacheKey = JSON.stringify(cacheData)
+  if (cache.has(cacheKey)) {
+    const { time, data } = cache.get(cacheKey)
+    if (Date.now() - time < 15 * 60 * 1000) {
+      // Cache for 15 minutes
+      // setting Cache-Control header here will not trigger
+      // Vercel Edge Function caching as the call must be a GET or HEAD type.
+      // And OpenAI API only supports POST.
+      // So we rolled our own cache mechanism here.
+      // See api/getWeatherData.js for an example of how to set Cache-Control header.
+      return res.status(200).json(data)
+    }
   }
-  return text
+
+  // Call the original handler and store result in cache
+  const json = res.json.bind(res)
+  res.json = (data) => {
+    cache.set(cacheKey, { time: Date.now(), data })
+    json(data)
+  }
+  handler(req, res)
 }
 
 async function handler(req, res) {
@@ -42,5 +60,4 @@ async function handler(req, res) {
   }
 }
 
-export default handler
-//
+export default cacheMiddleware(handler)
