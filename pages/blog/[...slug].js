@@ -36,6 +36,7 @@ const POSTQUERY = gql`
       title
       youTubeUrl
       id
+      excerpt
       content {
         html
       }
@@ -49,7 +50,7 @@ export async function getStaticProps({ params }) {
 }
 
 export default function Blog({ post }) {
-  const { slug, date, title, tags, youTubeUrl, content } = post
+  const { slug, date, title, youTubeUrl, content, excerpt } = post
   DOMPurify.addHook('afterSanitizeAttributes', function (node) {
     if (node.nodeName.toLowerCase() === 'a') {
       node.setAttribute('target', '_blank')
@@ -58,11 +59,7 @@ export default function Blog({ post }) {
 
   return (
     <>
-      <PageSEO
-        title={title}
-        description={content.html}
-        url={`${siteMetadata.siteUrl}/blog/${slug}`}
-      />
+      <PageSEO title={title} description={excerpt} url={`${siteMetadata.siteUrl}/blog/${slug}`} />
       <article>
         <div className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
           <dl>
