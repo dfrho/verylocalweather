@@ -36,9 +36,9 @@ export default function About({ authorDetails }) {
       <PageSEO title={`About - ${name}`} description={`About me - ${name}`} />
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="space-y-2 pt-6 pb-8 md:space-y-5">
-          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
+          <h2 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
             About
-          </h1>
+          </h2>
         </div>
         <div className="flex flex-col pt-8 md:flex-row md:space-x-8">
           <div className="flex w-full items-center justify-center md:w-1/3">

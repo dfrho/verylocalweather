@@ -17,8 +17,8 @@ const cacheMiddleware = (handler) => async (req, res) => {
       // setting Cache-Control header here will not trigger
       // Vercel Edge Function caching as the call must be a GET or HEAD type.
       // And OpenAI API only supports POST.
-      // So we rolled our own cache mechanism here.
-      // See api/getWeatherData.js for an example of how to set Cache-Control header.
+      // So we rolled our own cache mechanism here using the JavaScript Map data structure.
+      // See api/getWeatherData.js for an example of how to set Cache-Control header directly.
       return res.status(200).json(data)
     }
   }
