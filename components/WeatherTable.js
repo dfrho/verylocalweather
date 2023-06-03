@@ -13,9 +13,7 @@ const WeatherTable = () => {
       try {
         const ipResponse = await axios.get('https://api.ipify.org?format=json')
         const ipAddress = ipResponse.data.ip
-        const weatherResponse = await axios.get(
-          `https://weather-packing-advice.vercel.app/api/getWeatherData?ipAddress=${ipAddress}`
-        )
+        const weatherResponse = await axios.get(`/api/getWeatherData?ipAddress=${ipAddress}`)
         setWeatherData(weatherResponse.data)
       } catch (error) {
         console.error(error)

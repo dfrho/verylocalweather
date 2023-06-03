@@ -5,8 +5,8 @@ const siteMetadata = {
   description: 'Local weather in Nashville',
   language: 'en-us',
   theme: 'system', // system, dark or light
-  siteUrl: 'https://nash-music-log.netlify.app/',
-  siteRepo: 'https://github.com/dfrho/nashville-music',
+  siteUrl: 'https://verylocalweather.vercel.app/',
+  siteRepo: 'https://github.com/dfrho/verylocalweather.git',
   siteLogo: '/static/images/logo-one.png',
   image: '/static/images/avatar-one.png',
   socialBanner: '/static/images/twitter-card-two.png',
