@@ -16,7 +16,7 @@ import { ClientReload } from '@/components/ClientReload'
 import CookieConsent from 'react-cookie-consent'
 
 const isDevelopment = process.env.NODE_ENV === 'development'
-const isSocket = process.env.SOCKET
+const isSocket = false //process.env.SOCKET
 
 export default function App({ Component, pageProps }) {
   const [cookieValue, setCookieValue] = useState('false')
