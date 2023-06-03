@@ -28,6 +28,7 @@ const LayoutWrapper = ({ children }) => {
                   width={434}
                   height={84}
                 />
+                <h3 className="logo-added ml-10">Nashville Weather</h3>
               </div>
             </Link>
           </div>

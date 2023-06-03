@@ -59,11 +59,11 @@ export default function Home({ posts, seos }) {
     <>
       <PageSEO title={seoInfo.title} description={seoInfo.description} />
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
-        <div className="space-y-2 pt-6 pb-8 md:space-y-5">
+        {/* <div className="space-y-2 pt-6 pb-8 md:space-y-5">
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
             {seoInfo.description}
           </p>
-        </div>
+        </div> */}
         <ul className="divide-y divide-gray-200 dark:divide-gray-700">
           {!posts.length && 'No posts found.'}
           {posts.slice(0, MAX_DISPLAY).map((frontMatter) => {
