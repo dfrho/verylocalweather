@@ -1,19 +1,19 @@
 const siteMetadata = {
-  title: 'Very Local Nashville',
+  title: 'Very Local Weather Nashville',
   author: 'David Rhodes',
   headerTitle: 'Nashville Weather',
   description: 'Local weather in Nashville',
   language: 'en-us',
   theme: 'light', // system, dark or light
-  // siteUrl: 'https://verylocalweather.vercel.app/',
+  siteUrl: 'https://verylocalweather.vercel.app/',
   // image: '/static/images/avatar-one.png',
   // socialBanner: '/static/images/twitter-card-two.png',
-  // email: 'david@espressocode.tech',
-  // github: 'https://github.com/dfrho',
+  email: 'david@espressocode.tech',
+  github: 'https://github.com/dfrho',
   twitter: 'https://twitter.com/Twitter',
   facebook: 'https://facebook.com',
   youtube: 'https://youtube.com',
-  // linkedin: 'https://www.linkedin.com/in/rhodesdavid/',
+  linkedin: 'https://www.linkedin.com/in/rhodesdavid/',
   locale: 'en-US',
   analytics: {
     // If you want to use an analytics provider you have to add it to the
