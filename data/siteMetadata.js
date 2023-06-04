@@ -5,15 +5,15 @@ const siteMetadata = {
   description: 'Local weather in Nashville',
   language: 'en-us',
   theme: 'light', // system, dark or light
-  siteUrl: 'https://verylocalweather.vercel.app/',
-  image: '/static/images/avatar-one.png',
-  socialBanner: '/static/images/twitter-card-two.png',
-  email: 'david@espressocode.tech',
-  github: 'https://github.com/dfrho',
+  // siteUrl: 'https://verylocalweather.vercel.app/',
+  // image: '/static/images/avatar-one.png',
+  // socialBanner: '/static/images/twitter-card-two.png',
+  // email: 'david@espressocode.tech',
+  // github: 'https://github.com/dfrho',
   twitter: 'https://twitter.com/Twitter',
   facebook: 'https://facebook.com',
   youtube: 'https://youtube.com',
-  linkedin: 'https://www.linkedin.com/in/rhodesdavid/',
+  // linkedin: 'https://www.linkedin.com/in/rhodesdavid/',
   locale: 'en-US',
   analytics: {
     // If you want to use an analytics provider you have to add it to the
@@ -23,7 +23,7 @@ const siteMetadata = {
     simpleAnalytics: false, // true or false
     umamiWebsiteId: '', // e.g. 123e4567-e89b-12d3-a456-426614174000
     googleAnalyticsId: '', // e.g. UA-000000-2 or G-XXXXXXX
-    posthogAnalyticsId: process.env.POSTHOG_ID, // posthog.init e.g. phc_5yXvArzvRdqtZIsHkEm3Fkkhm3d0bEYUXCaFISzqPSQ
+    // posthogAnalyticsId: process.env.POSTHOG_ID, // posthog.init e.g. phc_5yXvArzvRdqtZIsHkEm3Fkkhm3d0bEYUXCaFISzqPSQ
   },
   newsletter: {
     // supports mailchimp, buttondown, convertkit, klaviyo, revue, emailoctopus
