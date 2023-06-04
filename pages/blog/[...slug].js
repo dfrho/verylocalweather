@@ -1,10 +1,8 @@
 import Link from '@/components/Link'
 import formatDate from '@/lib/utils/formatDate'
 import { gql } from 'graphql-request'
-import { YoutubeContainer } from '../index'
 import DOMPurify from 'isomorphic-dompurify'
 import { PageSEO } from '@/components/SEO'
-import siteMetadata from '@/data/siteMetadata'
 import hygraph from '../../hygraph'
 
 const ALLPOSTSQUERY = gql`
@@ -41,15 +39,24 @@ const POSTQUERY = gql`
         html
       }
     }
+    seos {
+      siteUrl
+      description
+      title
+      socialBanner {
+        id
+        url
+      }
+    }
   }
 `
 export async function getStaticProps({ params }) {
-  const { posts } = await hygraph.request(POSTQUERY, { slug: params.slug[0] })
-
-  return { props: { post: posts[0] } }
+  const { posts, seos } = await hygraph.request(POSTQUERY, { slug: params.slug[0] })
+  const seosData = seos[0]
+  return { props: { post: posts[0], seosData } }
 }
 
-export default function Blog({ post }) {
+export default function BlogPost({ post, seosData }) {
   const { slug, date, title, youTubeUrl, content, excerpt } = post
   DOMPurify.addHook('afterSanitizeAttributes', function (node) {
     if (node.nodeName.toLowerCase() === 'a') {
@@ -59,7 +66,13 @@ export default function Blog({ post }) {
 
   return (
     <>
-      <PageSEO title={title} description={excerpt} url={`${siteMetadata.siteUrl}/blog/${slug}`} />
+      <PageSEO
+        socialBanner={seosData.socialBanner}
+        ogType="article"
+        title={title}
+        description={excerpt}
+        url={`${seosData.siteUrl}/blog/${slug}`}
+      />
       <article>
         <div className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
           <dl>
@@ -77,15 +90,17 @@ export default function Blog({ post }) {
                   </Link>
                 </h2>
                 <div className="my-10">
-                  <YoutubeContainer>
+                  <div className="relative w-full max-w-full pt-[56.25%]">
                     <iframe
                       id="ytplayer"
                       type="text/html"
+                      className="absolute top-0 left-0 h-full w-full max-w-full"
                       width="640"
                       height="360"
-                      src={youTubeUrl}
+                      src={`${youTubeUrl}?controls=1`}
+                      allowFullScreen
                     ></iframe>
-                  </YoutubeContainer>
+                  </div>
                 </div>
                 <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content.html) }} />
               </div>
