@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import siteMetadata from '@/data/siteMetadata'
 import headerNavLinks from '@/data/headerNavLinks'
 import Link from './Link'
@@ -7,23 +8,33 @@ import MobileNav from './MobileNav'
 import ThemeSwitch from './ThemeSwitch'
 import { useTheme } from 'next-themes'
 import Image from './Image'
+import axios from 'axios'
 
 const LayoutWrapper = ({ children }) => {
   const { theme } = useTheme()
+  const [logos, setLogos] = useState(null)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const logoObject = await axios.get('/api/getLogos')
+        setLogos(logoObject)
+      } catch (error) {
+        console.error(error)
+      }
+    }
+    fetchData()
+  }, [])
 
   return (
     <SectionContainer>
       <div className="flex h-screen flex-col justify-between">
         <header className="flex items-center justify-between py-10">
           <div>
-            <Link href="/" aria-label={siteMetadata.headerTitle}>
+            <Link href="/" aria-label={siteMetadata.title}>
               <div className="flex items-center">
                 <Image
-                  src={
-                    theme === 'dark'
-                      ? '/static/images/very-local-logo.webp'
-                      : '/static/images/very-local-logo-light.png'
-                  }
+                  src={theme === 'dark' ? logos.logoLight : logos.logoDark}
                   alt="Very Local Weather"
                   width={434}
                   height={84}

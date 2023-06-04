@@ -2,7 +2,7 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import siteMetadata from '@/data/siteMetadata'
 
-const CommonSEO = ({ title, description, ogType, ogImage, twImage, canonicalUrl }) => {
+const CommonSEO = ({ title, description, ogType, ogImage, twImage, canonicalUrl, siteUrl }) => {
   const router = useRouter()
   return (
     <Head>
@@ -24,22 +24,20 @@ const CommonSEO = ({ title, description, ogType, ogImage, twImage, canonicalUrl 
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={twImage} />
-      <link
-        rel="canonical"
-        href={canonicalUrl ? canonicalUrl : `${siteMetadata.siteUrl}${router.asPath}`}
-      />
+      <link rel="canonical" href={canonicalUrl ? canonicalUrl : `${siteUrl}${router.asPath}`} />
     </Head>
   )
 }
 
-export const PageSEO = ({ title, description }) => {
-  const ogImageUrl = siteMetadata.siteUrl + siteMetadata.socialBanner
-  const twImageUrl = siteMetadata.siteUrl + siteMetadata.socialBanner
+export const PageSEO = ({ title, description, socialBanner, ogType }) => {
+  console.log('🚀 ~ file: SEO.js:33 ~ PageSEO ~ socialBanner:', socialBanner)
+  const ogImageUrl = socialBanner.url
+  const twImageUrl = socialBanner.url
   return (
     <CommonSEO
       title={title}
       description={description}
-      ogType="website"
+      ogType={ogType ? ogType : 'website'}
       ogImage={ogImageUrl}
       twImage={twImageUrl}
     />

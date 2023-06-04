@@ -41,15 +41,24 @@ const POSTQUERY = gql`
         html
       }
     }
+    seos {
+      siteUrl
+      description
+      title
+      socialBanner {
+        id
+        url
+      }
+    }
   }
 `
 export async function getStaticProps({ params }) {
-  const { posts } = await hygraph.request(POSTQUERY, { slug: params.slug[0] })
-
-  return { props: { post: posts[0] } }
+  const { posts, seos } = await hygraph.request(POSTQUERY, { slug: params.slug[0] })
+  const seosData = seos[0]
+  return { props: { post: posts[0], seosData } }
 }
 
-export default function Blog({ post }) {
+export default function BlogPost({ post, seosData }) {
   const { slug, date, title, youTubeUrl, content, excerpt } = post
   DOMPurify.addHook('afterSanitizeAttributes', function (node) {
     if (node.nodeName.toLowerCase() === 'a') {
@@ -59,7 +68,13 @@ export default function Blog({ post }) {
 
   return (
     <>
-      <PageSEO title={title} description={excerpt} url={`${siteMetadata.siteUrl}/blog/${slug}`} />
+      <PageSEO
+        socialBanner={seosData.socialBanner}
+        ogType="article"
+        title={title}
+        description={excerpt}
+        url={`${seosData.siteUrl}/blog/${slug}`}
+      />
       <article>
         <div className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
           <dl>

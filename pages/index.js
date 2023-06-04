@@ -1,13 +1,12 @@
 import Link from '@/components/Link'
-import { useTheme } from 'next-themes'
 import { PageSEO } from '@/components/SEO'
 import formatDate from '@/lib/utils/formatDate'
-import { gql } from 'graphql-request'
 import styled from 'styled-components'
 import sortByDate from '../lib/sortByDate'
+import { gql } from 'graphql-request'
 import hygraph from '../hygraph'
 
-const QUERY = gql`
+const ALL_POSTS_SEOS_QUERY = gql`
   {
     posts {
       slug
@@ -16,9 +15,24 @@ const QUERY = gql`
       youTubeUrl
       date
       excerpt
+      description
     }
     seos {
+      siteUrl
       description
+      title
+      logoDark {
+        id
+        url
+      }
+      socialBanner {
+        id
+        url
+      }
+      logo {
+        id
+        url
+      }
     }
   }
 `
@@ -47,27 +61,31 @@ export const YoutubeContainer = styled.div`
 const MAX_DISPLAY = 5
 
 export async function getStaticProps() {
-  const { posts, seos } = await hygraph.request(QUERY)
+  const { posts, seos } = await hygraph.request(ALL_POSTS_SEOS_QUERY)
+  const seosData = seos[0]
   const sortedPosts = sortByDate(posts)
-  return { props: { seos, posts: sortedPosts } }
+  return { props: { seosData, posts: sortedPosts } }
 }
 
-export default function Home({ posts, seos }) {
-  const { theme } = useTheme()
-  const seoInfo = seos[0]
+export default function Home({ posts, seosData }) {
+  const { description, title, socialBanner } = seosData
+  console.log('🚀 ~ file: index.js:72 ~ Home ~ socialBanner:', socialBanner)
   return (
     <>
-      <PageSEO title={seoInfo.title} description={seoInfo.description} />
+      <PageSEO
+        title={title}
+        description={description}
+        socialBanner={socialBanner}
+        ogType="website"
+      />
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
-        {/* <div className="space-y-2 pt-6 pb-8 md:space-y-5">
-          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            {seoInfo.description}
-          </p>
-        </div> */}
+        <div className="space-y-2 pt-6 pb-8 md:space-y-5">
+          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">{description}</p>
+        </div>
         <ul className="divide-y divide-gray-200 dark:divide-gray-700">
           {!posts.length && 'No posts found.'}
-          {posts.slice(0, MAX_DISPLAY).map((frontMatter) => {
-            const { slug, date, title, excerpt, youTubeUrl } = frontMatter
+          {posts.slice(0, MAX_DISPLAY).map((postObject) => {
+            const { slug, date, title, excerpt, youTubeUrl } = postObject
 
             return (
               <li key={slug} className="py-12">
