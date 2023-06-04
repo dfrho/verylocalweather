@@ -3,16 +3,18 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 })
 
 // You might need to insert additional domains in script-src if you are using external services
-const ContentSecurityPolicy = `
-  default-src 'self';
-  script-src 'self' 'unsafe-inline';
-  style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-  img-src * blob: data:;
-  font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com;
-  media-src 'none';
-  connect-src *;
-  frame-src https://www.youtube.com https://app.posthog.com
-`
+// const ContentSecurityPolicy = `
+//   default-src 'self';
+//   script-src 'self' 'unsafe-inline';
+//   style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+//   img-src * blob: data:;
+//   font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com;
+//   media-src 'none';
+//   connect-src *;
+//   frame-src https://www.youtube.com https://app.posthog.com
+// `
+const ContentSecurityPolicy =
+  "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src * blob: data:; font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com; media-src 'none'; connect-src *; frame-src https://www.youtube.com https://app.posthog.com;"
 
 const securityHeaders = [
   // https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
