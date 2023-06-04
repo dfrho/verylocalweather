@@ -54,7 +54,7 @@ const securityHeaders = [
 
 module.exports = withBundleAnalyzer({
   images: {
-    domains: ['media.graphassets.com'],
+    domains: ['media.graphassets.com', 'cdn.weatherapi.com'],
   },
   reactStrictMode: true,
   pageExtensions: ['js', 'jsx', 'md', 'mdx'],

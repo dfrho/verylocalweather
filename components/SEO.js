@@ -30,7 +30,6 @@ const CommonSEO = ({ title, description, ogType, ogImage, twImage, canonicalUrl,
 }
 
 export const PageSEO = ({ title, description, socialBanner, ogType }) => {
-  console.log('🚀 ~ file: SEO.js:33 ~ PageSEO ~ socialBanner:', socialBanner)
   const ogImageUrl = socialBanner.url
   const twImageUrl = socialBanner.url
   return (

@@ -1,7 +1,6 @@
 import Link from '@/components/Link'
 import { PageSEO } from '@/components/SEO'
 import formatDate from '@/lib/utils/formatDate'
-import styled from 'styled-components'
 import sortByDate from '../lib/sortByDate'
 import { gql } from 'graphql-request'
 import hygraph from '../hygraph'
@@ -36,28 +35,6 @@ const ALL_POSTS_SEOS_QUERY = gql`
     }
   }
 `
-export const YoutubeContainer = styled.div`
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  padding-top: 56.25%; /* 16:9 aspect ratio */
-  max-width: 100%; /* ensure the container doesn't overflow on smaller screens */
-
-  & iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    max-width: 100%; /* ensure the video maintains its aspect ratio on larger screens */
-
-    /* adjust the width and height for smaller screens */
-    @media (max-width: 767px) {
-      width: 100%;
-      height: 100%;
-    }
-  }
-`
 const MAX_DISPLAY = 5
 
 export async function getStaticProps() {
@@ -69,7 +46,6 @@ export async function getStaticProps() {
 
 export default function Home({ posts, seosData }) {
   const { description, title, socialBanner } = seosData
-  console.log('🚀 ~ file: index.js:72 ~ Home ~ socialBanner:', socialBanner)
   return (
     <>
       <PageSEO
@@ -108,16 +84,17 @@ export default function Home({ posts, seosData }) {
                               {title}
                             </Link>
                           </h2>
-                          <YoutubeContainer>
+                          <div className="relative w-full max-w-full pt-[56.25%]">
                             <iframe
                               id="ytplayer"
                               type="text/html"
+                              className="absolute top-0 left-0 h-full w-full max-w-full"
                               width="640"
                               height="360"
-                              src={youTubeUrl}
+                              src={`${youTubeUrl}?controls=1`}
                               allowFullScreen
                             ></iframe>
-                          </YoutubeContainer>
+                          </div>
                         </div>
                         <div className="prose max-w-none text-gray-500 dark:text-gray-400">
                           {excerpt}

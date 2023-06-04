@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react'
 import siteMetadata from '@/data/siteMetadata'
 import headerNavLinks from '@/data/headerNavLinks'
 import Link from './Link'
@@ -8,24 +7,9 @@ import MobileNav from './MobileNav'
 import ThemeSwitch from './ThemeSwitch'
 import { useTheme } from 'next-themes'
 import Image from './Image'
-import axios from 'axios'
 
 const LayoutWrapper = ({ children }) => {
   const { theme } = useTheme()
-  const [logos, setLogos] = useState(null)
-
-  useEffect(() => {
-    console.log('during useEffect')
-    const fetchData = async () => {
-      try {
-        const logoObject = await axios.get('/api/getLogos')
-        setLogos(logoObject)
-      } catch (error) {
-        console.error(error)
-      }
-    }
-    fetchData()
-  }, [])
 
   return (
     <SectionContainer>
@@ -34,15 +18,19 @@ const LayoutWrapper = ({ children }) => {
           <div>
             <Link href="/" aria-label={siteMetadata.title}>
               <div className="flex items-center">
-                {logos ? (
-                  <Image
-                    src={theme === 'dark' ? logos.logoDark : logos.logoLight}
-                    alt="Very Local Weather"
-                    width={434}
-                    height={84}
-                  />
-                ) : null}
-                <h3 className="logo-added ml-10">Nashville Weather</h3>
+                <Image
+                  src={
+                    theme === 'dark'
+                      ? '/static/images/very-local-logo-dark.png'
+                      : '/static/images/very-local-logo-light.png'
+                  }
+                  alt="Very Local Weather"
+                  width={434}
+                  height={84}
+                />
+                <p className="font-rubik ml-6 pt-4 text-lg font-bold md:pt-5 md:text-2xl">
+                  {siteMetadata.headerTitle}
+                </p>
               </div>
             </Link>
           </div>

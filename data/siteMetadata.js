@@ -1,7 +1,7 @@
 const siteMetadata = {
   title: 'Very Local Nashville',
   author: 'David Rhodes',
-  headerTitle: 'Very Local Nashville',
+  headerTitle: 'Nashville Weather',
   description: 'Local weather in Nashville',
   language: 'en-us',
   theme: 'system', // system, dark or light

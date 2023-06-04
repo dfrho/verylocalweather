@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import Image from './Image'
 import { Tooltip } from 'react-tooltip'
 import 'react-tooltip/dist/react-tooltip.css'
 
@@ -88,10 +89,12 @@ const WeatherTable = () => {
                   data-tooltip-place="top"
                   onClick={() => setIsModalOpen(true)}
                 >
-                  <img
-                    className="weather-icon"
+                  <Image
+                    // className="weather-icon"
                     src={`https:${weatherData.current.condition.icon}`}
                     alt={weatherData.current.condition.text}
+                    width={50}
+                    height={50}
                   />
                 </button>
               </div>

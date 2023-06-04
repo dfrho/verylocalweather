@@ -1,36 +1,9 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import siteMetadata from '@/data/siteMetadata'
-import hygraph from '../hygraph'
-import { gql } from 'graphql-request'
-
-// const ALL_SEOS_QUERY = gql`
-//   {
-//     seos {
-//       siteUrl
-//       description
-//       title
-//       logoDark {
-//         id
-//         url
-//       }
-//       socialBanner {
-//         id
-//         url
-//       }
-//       logo {
-//         id
-//         url
-//       }
-//     }
-//   }
-// `
 
 export default function CommonSEO({ title, description, socialBanner, siteURL, ogType }) {
-  console.log('🚀 ~ file: CommonSEO.js:30 ~ CommonSEO ~ socialBanner:', socialBanner)
   const router = useRouter()
-  //   const seosData = seos[0]
-  //   const { title, description, socialBanner, siteURL } = seosData
   return (
     <Head>
       <title>{title}</title>
