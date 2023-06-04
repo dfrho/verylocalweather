@@ -4,7 +4,7 @@ const siteMetadata = {
   headerTitle: 'Nashville Weather',
   description: 'Local weather in Nashville',
   language: 'en-us',
-  theme: 'system', // system, dark or light
+  theme: 'light', // system, dark or light
   siteUrl: 'https://verylocalweather.vercel.app/',
   image: '/static/images/avatar-one.png',
   socialBanner: '/static/images/twitter-card-two.png',
