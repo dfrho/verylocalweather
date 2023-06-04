@@ -5,12 +5,12 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 // You might need to insert additional domains in script-src if you are using external services
 const ContentSecurityPolicy = `
   default-src 'self';
-  script-src 'self' 'unsafe-eval' 'unsafe-inline' posthog.com static.posthog.com discus.app;
-  style-src 'self' 'unsafe-inline';
+  script-src 'self' 'unsafe-eval' 'unsafe-inline';
+  style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
   img-src * blob: data:;
+  font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com;
   media-src 'none';
   connect-src *;
-  font-src 'self';
   frame-src https://www.youtube.com https://app.posthog.com
 `
 
