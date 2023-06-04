@@ -15,6 +15,7 @@ const LayoutWrapper = ({ children }) => {
   const [logos, setLogos] = useState(null)
 
   useEffect(() => {
+    console.log('during useEffect')
     const fetchData = async () => {
       try {
         const logoObject = await axios.get('/api/getLogos')
@@ -33,12 +34,14 @@ const LayoutWrapper = ({ children }) => {
           <div>
             <Link href="/" aria-label={siteMetadata.title}>
               <div className="flex items-center">
-                <Image
-                  src={theme === 'dark' ? logos.logoLight : logos.logoDark}
-                  alt="Very Local Weather"
-                  width={434}
-                  height={84}
-                />
+                {logos ? (
+                  <Image
+                    src={theme === 'dark' ? logos.logoDark : logos.logoLight}
+                    alt="Very Local Weather"
+                    width={434}
+                    height={84}
+                  />
+                ) : null}
                 <h3 className="logo-added ml-10">Nashville Weather</h3>
               </div>
             </Link>

@@ -5,7 +5,7 @@ async function handler(req, res) {
   const ALL_SEOS_QUERY = gql`
     {
       seos {
-        socialBanner {
+        logoDark {
           id
           url
         }
@@ -20,9 +20,8 @@ async function handler(req, res) {
 
   const { seos } = await hygraph.request(ALL_SEOS_QUERY)
   const seosData = seos[0]
-  console.log('🚀 ~ file: LayoutWrapper.js:44 ~ fetchData ~ seosData:', seosData)
 
-  return { logo: { logoLight: seosData.logo.url, logoDark: seosData.logoDark.url } }
+  return { logo: { logoLight: seosData.logo.url, logoDark: seosData.logo_dark.url } }
 }
 
 export default handler
