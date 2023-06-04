@@ -75,11 +75,6 @@ const WeatherTable = () => {
       {weatherData ? (
         <div className="weather-data">
           <div className="weather-status">
-            <h3 className="weather-header">
-              {`Current Weather in ${weatherData.location.name} is
-            ${capitalizeWords(weatherData.current.condition.text)}`}
-            </h3>
-
             {advice ? (
               <div className="weather-condition">
                 <Tooltip id="my-tooltip" />
@@ -107,6 +102,10 @@ const WeatherTable = () => {
                 height={40}
               />
             )}
+            <h3 className="weather-header">
+              {`Current Weather in ${weatherData.location.name} is
+            ${capitalizeWords(weatherData.current.condition.text)}`}
+            </h3>
           </div>
           <table>
             <tbody>
