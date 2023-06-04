@@ -2,25 +2,14 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })
 
-// You might need to insert additional domains in script-src if you are using external services
-// const ContentSecurityPolicy = `
-//   default-src 'self';
-//   script-src 'self' 'unsafe-inline';
-//   style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-//   img-src * blob: data:;
-//   font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com;
-//   media-src 'none';
-//   connect-src *;
-//   frame-src https://www.youtube.com https://app.posthog.com
-// `
 const ContentSecurityPolicy =
-  "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src * blob: data:; font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com; media-src 'none'; connect-src *; frame-src https://www.youtube.com https://app.posthog.com;"
+  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src * blob: data:; font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com; media-src 'none'; connect-src *; frame-src https://www.youtube.com https://vercel.live;"
 
 const securityHeaders = [
   // https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
   {
     key: 'Content-Security-Policy',
-    value: process.env.NODE_ENV === 'development' ? '' : ContentSecurityPolicy,
+    value: ContentSecurityPolicy,
   },
   // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy
   {
