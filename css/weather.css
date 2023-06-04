@@ -20,21 +20,16 @@
   
   @keyframes swell {
     0% { transform: scale(1); }
-    50% { transform: scale(1.08); }
+    50% { transform: scale(1.15); }
     100% { transform: scale(1); }
   }
   
   .weather-condition > button {
-    animation: swell 4s infinite;
-    border: 1px solid #4f46e5;
-    border-radius: 50%;
-    padding: 4px 0px 0px 10px;
+    animation: swell 3s infinite;
     cursor: pointer;
     color: white;
     transition: border-color 0.2s ease-in-out;
   }
-  
-  
   
   .weather-header {
     margin-right: 1rem;

@@ -90,19 +90,21 @@ const WeatherTable = () => {
                   onClick={() => setIsModalOpen(true)}
                 >
                   <Image
-                    // className="weather-icon"
+                    className="weather-icon"
                     src={`https:${weatherData.current.condition.icon}`}
                     alt={weatherData.current.condition.text}
-                    width={50}
-                    height={50}
+                    width={40}
+                    height={40}
                   />
                 </button>
               </div>
             ) : (
-              <img
+              <Image
                 className="weather-icon"
                 src={`https:${weatherData.current.condition.icon}`}
                 alt={weatherData.current.condition.text}
+                width={40}
+                height={40}
               />
             )}
           </div>
