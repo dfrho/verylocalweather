@@ -18,7 +18,7 @@ const securityHeaders = [
   // https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
   {
     key: 'Content-Security-Policy',
-    value: process.env.NODE_ENV === 'development' ? "default-src 'self';" : ContentSecurityPolicy,
+    value: process.env.NODE_ENV === 'development' ? '' : ContentSecurityPolicy,
   },
   // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy
   {
