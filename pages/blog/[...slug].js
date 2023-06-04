@@ -1,10 +1,8 @@
 import Link from '@/components/Link'
 import formatDate from '@/lib/utils/formatDate'
 import { gql } from 'graphql-request'
-import { YoutubeContainer } from '../index'
 import DOMPurify from 'isomorphic-dompurify'
 import { PageSEO } from '@/components/SEO'
-import siteMetadata from '@/data/siteMetadata'
 import hygraph from '../../hygraph'
 
 const ALLPOSTSQUERY = gql`
@@ -92,15 +90,17 @@ export default function BlogPost({ post, seosData }) {
                   </Link>
                 </h2>
                 <div className="my-10">
-                  <YoutubeContainer>
+                  <div className="relative w-full max-w-full pt-[56.25%]">
                     <iframe
                       id="ytplayer"
                       type="text/html"
+                      className="absolute top-0 left-0 h-full w-full max-w-full"
                       width="640"
                       height="360"
-                      src={youTubeUrl}
+                      src={`${youTubeUrl}?controls=1`}
+                      allowFullScreen
                     ></iframe>
-                  </YoutubeContainer>
+                  </div>
                 </div>
                 <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content.html) }} />
               </div>

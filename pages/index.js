@@ -91,7 +91,7 @@ export default function Home({ posts, seosData }) {
                               className="absolute top-0 left-0 h-full w-full max-w-full"
                               width="640"
                               height="360"
-                              src={`${youTubeUrl}?controls=1`}
+                              src={youTubeUrl}
                               allowFullScreen
                             ></iframe>
                           </div>
