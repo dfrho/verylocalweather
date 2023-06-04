@@ -3,7 +3,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 })
 
 const ContentSecurityPolicy =
-  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src * blob: data:; font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com; media-src 'none'; connect-src *; frame-src https://www.youtube.com https://app.posthog.com;"
+  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src * blob: data:; font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com; media-src 'none'; connect-src *; frame-src https://www.youtube.com https://vercel.live;"
 
 const securityHeaders = [
   // https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
