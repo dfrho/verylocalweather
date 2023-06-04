@@ -5,7 +5,7 @@ import { gql } from 'graphql-request'
 import DOMPurify from 'isomorphic-dompurify'
 import hygraph from '../hygraph'
 
-const AUTHORQUERY = gql`
+const AUTHOR_SEO_QUERY = gql`
   {
     authors {
       name
@@ -18,22 +18,35 @@ const AUTHORQUERY = gql`
       }
       company
     }
+    seos {
+      siteUrl
+      description
+      title
+      socialBanner {
+        id
+        url
+      }
+    }
   }
 `
 
 const DEFAULT_LAYOUT = 'AuthorLayout'
 
 export async function getStaticProps() {
-  const { authors } = await hygraph.request(AUTHORQUERY)
-  return { props: { authorDetails: authors[0] } }
+  const { authors, seos } = await hygraph.request(AUTHOR_SEO_QUERY)
+  return { props: { authorDetails: authors[0], seoData: seos[0] } }
 }
 
-export default function About({ authorDetails }) {
+export default function About({ authorDetails, seoData }) {
   const { name, picture, title, company, email, linkedin, github, biographyHtml } = authorDetails
 
   return (
     <>
-      <PageSEO title={`About - ${name}`} description={`About me - ${name}`} />
+      <PageSEO
+        socialBanner={seoData.socialBanner}
+        title={`About - ${name}`}
+        description={`About me - ${name}`}
+      />
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="space-y-2 pt-6 pb-8 md:space-y-5">
           <h2 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
