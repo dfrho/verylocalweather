@@ -41,8 +41,6 @@ const POSTQUERY = gql`
     }
     seos {
       siteUrl
-      description
-      title
       socialBanner {
         id
         url

@@ -67,9 +67,7 @@ export default function App({ Component, pageProps }) {
           buttonStyle={{ color: '#fff', background: 'green', fontSize: '13px' }}
           expires={150}
         >
-          This app uses cookies to enhance the user experience, as well as analytics that capture
-          screen clicks, location, and mouse movements (PostHog.com). That is all we track. Enjoy
-          the weather 🤠.
+          This app uses cookies to enhance your user experience. Enjoy the weather 🤠.
         </CookieConsent>
       </LayoutWrapper>
     </ThemeProvider>
