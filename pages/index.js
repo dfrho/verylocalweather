@@ -45,7 +45,7 @@ export async function getStaticProps() {
 }
 
 export default function Home({ posts, seosData }) {
-  const { description, title, socialBanner } = seosData
+  const { description, title, socialBanner, siteUrl } = seosData
   return (
     <>
       <PageSEO
@@ -53,6 +53,7 @@ export default function Home({ posts, seosData }) {
         description={description}
         socialBanner={socialBanner}
         ogType="website"
+        siteUrl={siteUrl}
       />
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="space-y-2 pt-6 pb-8 md:space-y-5">

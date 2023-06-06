@@ -13,10 +13,12 @@ const AUTHOR_QUERY = gql`
       biographyHtml {
         html
       }
+      linkedin
+      github
+      email
       picture {
         url
       }
-      company
     }
   }
 `
